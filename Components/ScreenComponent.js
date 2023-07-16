@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 
 const ScreenComponent = ({ children }) => {
     const scrollViewRef = useRef(null);
-    console.log(scrollViewRef.current);
+    // console.log(scrollViewRef.current);
     return <ScrollView ref={scrollViewRef}>{children}</ScrollView>;
 };
 
