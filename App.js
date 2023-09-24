@@ -22,7 +22,6 @@ import {
 } from "@expo-google-fonts/poppins";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ScreenComponent from "./components/ScreenComponent";
 import { AntDesign } from "@expo/vector-icons";
 <AntDesign name="plus" size={24} color="black" />;
 
@@ -50,11 +49,12 @@ export default function App() {
         );
     } else {
         return (
-            <SafeAreaProvider>
-                <KeyboardAvoidingView style={{ flex: 1 }}>
-                    <ScreenComponent>
-                        <View style={[styles.container]}>
-                            <Header />
+            <SafeAreaProvider style={styles.container}>
+                <View style={styles.container}>
+                    <KeyboardAvoidingView style={styles.container}>
+                        <Header />
+
+                        <View>
                             <View style={styles.mainContainer}>
                                 <View
                                     style={
@@ -76,36 +76,30 @@ export default function App() {
                                         />
                                     </Pressable>
                                 </View>
-                                <ScrollView
-                                    showsVerticalScrollIndicator={false}
-                                >
-                                    {/* list */}
-                                </ScrollView>
                             </View>
-                            <Footer />
                         </View>
-                    </ScreenComponent>
-                </KeyboardAvoidingView>
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
+                            style={styles.container}
+                        ></ScrollView>
+                    </KeyboardAvoidingView>
+                    <Footer />
+                </View>
             </SafeAreaProvider>
         );
     }
 }
 
-console.log(Dimensions.get("screen").height);
-
 const styles = StyleSheet.create({
     container: {
-        flex: 0,
+        flex: 1,
     },
     mainContainer: {
-        flex: 0,
         paddingVertical: 24,
         paddingHorizontal: 35,
-        height: Dimensions.get("screen").height - 238,
-        minWidth: "100%",
+        height: 100,
     },
     mainContainerTextInputContainer: {
-        flex: 0,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -119,7 +113,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     textInputButton: {
-        flex: 0,
         alignItems: "center",
         justifyContent: "center",
         height: 40,

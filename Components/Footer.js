@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: "#EEEEEE",
         borderBottomWidth: 0,
-        backgroundColor: "red",
     },
     text: {
         fontFamily: "Poppins_700Bold",
