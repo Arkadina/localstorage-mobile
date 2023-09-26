@@ -19,10 +19,6 @@ import Home from "./views/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// import test from "./test";
-
-// test();
-
 export default function App() {
     const [fontsLoaded] = Font.useFonts({
         Poppins_400Regular,
@@ -40,7 +36,7 @@ export default function App() {
     } else {
         return (
             <Provider store={store}>
-                <PersistGate persistor={persistor} loading={null}>
+                <PersistGate loading={null} persistor={persistor}>
                     <SafeAreaProvider style={styles.container}>
                         <View style={styles.container}>
                             <Header />

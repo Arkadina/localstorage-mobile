@@ -9,25 +9,24 @@ import {
     TextInput,
     View,
     Text,
+    TouchableWithoutFeedback,
+    Vibration,
 } from "react-native";
 
-import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../app/store/slices/todoSlice";
+import { addTodo, deleteTodo, resetTodo } from "../app/store/slices/todoSlice";
+
+import { AntDesign } from "@expo/vector-icons";
 
 function Home() {
     const [inputValue, setInputValue] = useState();
-
+    const [todos, setTodos] = useState();
     const selector = useSelector((state) => state);
     const dispatch = useDispatch();
 
-    console.log(selector.todo.todos);
-
     useEffect(() => {
         setTodos(selector.todo.todos);
-    }, [selector]);
-
-    const [todos, setTodos] = useState([]);
+    }, [selector.todo]);
 
     function handleOnChange(e) {
         setInputValue(e);
@@ -76,14 +75,32 @@ function Home() {
 }
 
 function List({ todos }) {
+    const dispatch = useDispatch();
+
+    function handleLongPress(id) {
+        console.log("LongPress");
+        dispatch(deleteTodo(id));
+
+        Vibration.vibrate(1000);
+    }
+
+    function handlePressOut() {
+        console.log("PressOut");
+    }
+
     return (
         <View style={styles.itemContainer}>
             <FlatList
                 data={todos}
                 renderItem={({ item }) => (
-                    <Text style={styles.item}>{item}</Text>
+                    <TouchableWithoutFeedback
+                        onLongPress={() => handleLongPress(item.id)}
+                        onPressOut={() => handlePressOut()}
+                    >
+                        <Text style={styles.item}>{item.todo}</Text>
+                    </TouchableWithoutFeedback>
                 )}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item, index) => item.id}
             />
         </View>
     );

@@ -3,10 +3,9 @@ import React, { useEffect, useRef } from "react";
 
 const Header = () => {
     const elRef = useRef();
-    const elRef2 = useRef();
 
     useEffect(() => {
-        console.log(elRef.current.clientHeight);
+        // console.log(elRef.current.clientHeight);
     }, []);
     return (
         <View
@@ -18,8 +17,6 @@ const Header = () => {
         </View>
     );
 };
-
-export default Header;
 
 const styles = StyleSheet.create({
     container: {
@@ -35,3 +32,6 @@ const styles = StyleSheet.create({
         fontFamily: "Poppins_700Bold",
     },
 });
+
+export default Header;
+
